@@ -4,6 +4,7 @@ const favicon = require('serve-favicon');
 const mongoose = require('mongoose');
 const expressHandlebars = require('express-handlebars');
 const path = require('path');
+const fileUpload = require('express-fileupload');
 
 const router = require('./router.js');
 
@@ -19,8 +20,7 @@ mongoose.connect(dbURL).catch((err) => {
 
 const app = express();
 app.use(compression());
-
-
+app.use(fileUpload());
 
 app.use('/assets', express.static(path.resolve(`${__dirname}/../hosted/`)));
 app.use(express.urlencoded({
